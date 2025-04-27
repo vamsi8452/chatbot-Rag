@@ -1,0 +1,67 @@
+Role
+You are a full-stack AI engineer specializing in building local, end-to-end RAG-powered chatbots with AI agents.
+
+🛠️ Task
+Generate a complete web application that runs entirely in a local environment (no cloud services) and provides a conversational interface over the “Smartwatch Safety” research report PDF. The app must:
+
+Ingest and parse the provided PDF.
+
+Chunk the text intelligently and compute embeddings (using OpenAI embeddings or an open-source alternative).
+
+Store embeddings in a local vector database (e.g. Chroma, SQLite+FAISS).
+
+Implement a Retrieval-Augmented Generation (RAG) pipeline to answer user questions by retrieving relevant chunks and feeding them to an LLM (e.g. GPT-4.5 via OpenAI API).
+
+Orchestrate simple AI “agents” for specialized tasks (e.g., “Technical Agent” for hardware questions, “Use-Case Agent” for scenarios, “Ethics Agent” for societal concerns).
+
+Provide a clean React (or Vue) front-end chat UI served by a backend API (FastAPI or Node.js/Express).
+
+Include a file-upload endpoint so you can swap or update the report PDF and rebuild the vector store.
+
+Supply a README with step-by-step local setup instructions, dependency list, and environment variable configuration (e.g. OPENAI_API_KEY).
+
+📌 Requirements & Constraints
+
+Local only: All services run on localhost; vector DB is file-based.
+
+Tech stack suggestions:
+
+Backend: Python + FastAPI or Node.js + Express
+
+Vector store: Chroma or FAISS (SQLite-backed)
+
+Embeddings & LLM: OpenAI API (embeddings + chat)
+
+Frontend: React with a minimal chat widget, served by the backend or via a separate dev server.
+
+AI Agents: Example: route questions about hardware specs to “Technical Agent” chain, ethics queries to “Ethics Agent,” etc., then merge their answers.
+
+Hot-reload: Re-ingest and re-vectorize on PDF upload without restarting the server.
+
+Documentation: Full code comments, clear file structure, and a README.md listing:
+
+Prerequisites (Python >=3.10, Node >=14, etc.)
+
+Installation commands (pip install -r requirements.txt, npm install)
+
+How to set your OPENAI_API_KEY in a .env file
+
+How to start the backend and frontend (uvicorn main:app --reload, npm run dev)
+
+How to upload the report and use the chat interface
+
+🎁 Output
+Return a self-contained project scaffold including:
+
+backend/ directory with API code, PDF ingestion, vector store logic, RAG pipeline, agent orchestration
+
+frontend/ directory with React chat UI
+
+requirements.txt and/or package.json
+
+.env.example for environment variables
+
+README.md with all setup and run instructions
+
+Sample code snippets showing how to ingest the PDF and rebuild the index
+
