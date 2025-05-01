@@ -1,28 +1,78 @@
-# Pink Protect RAG Chatbot
+# AI Chatbot
 
-A local Retrieval-Augmented Generation (RAG) chatbot that provides a conversational interface over the "Smartwatch Safety" research report PDF. This application runs entirely on your local machine with no cloud services required (except for OpenAI API calls).
+A modern, full-stack AI chatbot application built with TypeScript, React, and Node.js.
 
 ## Features
 
-- **PDF Ingestion**: Upload and parse the "Smartwatch Safety" research report PDF
-- **Intelligent Text Chunking**: Break down the document into semantically meaningful chunks
-- **Embeddings Computation**: Using OpenAI or open-source alternatives
-- **Local Vector Database**: Store embeddings in a file-based vector database
-- **RAG Pipeline**: Retrieve relevant context from the vector store to answer user questions
-- **AI Agents**: Specialized agents for Technical, Use-Case, and Ethics questions
-- **Clean React UI**: Modern chat interface with message history
-- **File Upload**: Upload and swap PDFs to rebuild the vector store
+- Real-time chat interface
+- AI-powered responses
+- File upload and processing
+- Vector database integration
+- Modern UI with Tailwind CSS
 
-## Prerequisites
+## Project Structure
 
-- Node.js >= 14
-- npm or yarn
-- OpenAI API key
+The project is organized into three main directories:
 
-## Setup Instructions
+1. **Client** (`/client`)
+   - React-based frontend
+   - TypeScript for type safety
+   - Tailwind CSS for styling
+   - Real-time chat interface
+
+2. **Server** (`/server`)
+   - Node.js backend
+   - Express.js for API routes
+   - AI model integration
+   - File processing
+
+3. **Shared** (`/shared`)
+   - Common TypeScript types
+   - Shared utilities
+   - Database schemas
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- Docker (optional)
+- Git
+
+### Installation
 
 1. Clone the repository:
+   ```bash
+   git clone https://github.com/vamsi8452/Ai-chat-bot.git
+   cd Ai-chat-bot
+   ```
 
-```bash
-git clone https://github.com/yourusername/pink-protect-rag.git
-cd pink-protect-rag
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Configure environment variables:
+   ```bash
+   # Copy example environment files
+   cp .env.example .env
+   ```
+
+4. Start the application:
+   ```bash
+   # Development mode
+   npm run dev
+
+   # Production mode
+   npm run build
+   npm start
+   ```
+
+## Development
+
+- Frontend: `http://localhost:3000`
+- Backend: `http://localhost:5000`
+
+## License
+
+MIT License - See LICENSE file for details

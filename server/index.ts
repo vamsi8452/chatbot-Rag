@@ -2,6 +2,10 @@ import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import path from "path";
+import { storage } from "./storage";
+import { startDocumentProcessing } from "./rag";
+import fs from "fs";
 
 const app = express();
 app.use(express.json());
@@ -40,6 +44,26 @@ app.use((req, res, next) => {
 (async () => {
   const server = await registerRoutes(app);
 
+  // Load default PDF on startup
+  try {
+    const originalPath = path.resolve(process.cwd(), "attached_assets", "Pink Protect.pdf");
+    const tempDir = path.resolve(process.cwd(), "temp-uploads");
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
+    const tempFilePath = path.join(tempDir, `default-Pink Protect-${Date.now()}.pdf`);
+    fs.copyFileSync(originalPath, tempFilePath);
+    const defaultDoc = await storage.createDocument({
+      filename: "Pink Protect.pdf",
+      contentType: "application/pdf",
+      processingStatus: "pending"
+    });
+    await startDocumentProcessing(tempFilePath, defaultDoc.id);
+    log(`Default document loaded: ${defaultDoc.filename}`);
+  } catch (err: any) {
+    log(`Failed to load default document: ${err.message}`);
+  }
+
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -60,7 +84,7 @@ app.use((req, res, next) => {
   // ALWAYS serve the app on port 5000
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
-  const port = 5000;
+  const port = process.env.PORT ? parseInt(process.env.PORT) : 5000;
   server.listen({
     port,
     host: "0.0.0.0",

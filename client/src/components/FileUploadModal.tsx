@@ -229,6 +229,7 @@ export default function FileUploadModal({ onClose, onUploadComplete }: FileUploa
         {!uploadProgress ? (
           <>
             <div
+              onClick={() => fileInputRef.current?.click()}
               className={`file-drop-area flex flex-col items-center justify-center p-8 text-center border-2 border-dashed rounded-md ${
                 isDragging ? 'border-primary-500 bg-primary-50' : 'border-neutral-300'
               }`}
